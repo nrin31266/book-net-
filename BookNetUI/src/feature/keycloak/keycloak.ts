@@ -56,6 +56,8 @@ class KeycloakService {
     return this.keycloak.logout({ redirectUri: window.location.origin });
   }
 
+  
+
 
     // ✅ Hàm tự động refresh token
   private static _autoRefresh() {

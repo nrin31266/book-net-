@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 import { useAuth } from '../providers/AuthProvider';
+import KeycloakService from '../feature/keycloak/keycloak';
 
 const AppLayout: React.FC = () => {
   const location = useLocation();
@@ -86,6 +87,14 @@ const AppLayout: React.FC = () => {
                   {secondaryInfo}
                 </span>
               </div>
+              <button
+                onClick={() => {
+                  KeycloakService.keycloak.accountManagement();
+                }}
+                className="ml-2 px-3 py-1 bg-green-500 hover:bg-green-600 text-white text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
+              >
+                Account
+              </button>
               <button
                 onClick={() => {
                   console.log('👋 Logging out user:', profile);

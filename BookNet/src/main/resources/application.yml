@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: BookNet
+  datasource:
+    url: jdbc:postgresql://localhost:5432/book-net
+    driverClassName: org.postgresql.Driver
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update   # hoặc create để tạo mới hoàn toàn
+    show-sql: true
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/book-net
+server:
+  port: 8888
+

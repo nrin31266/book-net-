@@ -14,7 +14,8 @@ services:
       KC_DB_USERNAME: root
       KC_DB_PASSWORD: root
       KC_DB_DATABASE: main
-#    volumes:
+    volumes:
+      - /home/nrin31266/IdeaProjects/book-net/keycloakify-starter/dist_keycloak/theme-dev/theme/keycloakify-starter:/opt/keycloak/themes/keycloakify-starter
 #      - /home/nrin31266/IdeaProjects/book-net/BookNet/keycloak/realm:/opt/keycloak/realms
     depends_on:
       - postgres

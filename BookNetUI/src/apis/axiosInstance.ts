@@ -15,12 +15,21 @@ let refreshPromise: Promise<void> | null = null;
 
 // Hàm refresh token an toàn (đảm bảo chỉ 1 refresh đang diễn ra)
 const refreshTokenSafely = async (): Promise<void> => {
+  const now = Math.floor(Date.now() / 1000);
+  const tokenExp = keycloak.tokenParsed?.exp || 0;
+  const bufferTime = 10; // giây
+
+  // Nếu token vẫn còn hạn đủ lâu, không cần refresh, tranh refresh thừa
+  if (tokenExp - now > bufferTime) {
+    return;
+  }
   if (!isRefreshing) {
     isRefreshing = true;
     refreshPromise = new Promise<void>(async (resolve, reject) => {
       try {
         await keycloak.updateToken(10); // còn <10s thì refresh
         isRefreshing = false;
+        console.log("Interceptor refres token!!!")
         resolve();
       } catch (err) {
         console.error("🔴 Token refresh failed:", err);
